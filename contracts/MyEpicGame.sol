@@ -40,14 +40,38 @@ contract MyEpicGame is ERC721 {
     // to store the owner of the NFT and reference it later
     mapping(address => uint256) public nftHolders;
 
+    struct BigBoss {
+        string name;
+        string imageURI;
+        uint hp;
+        uint maxHp;
+        uint attackDamage;
+    }
+    BigBoss public bigBoss; // var to hold our boss so that we can reference it in different functions
+
     constructor(
         string[] memory characterNames,
         string[] memory characterImageURIs,
         uint[] memory characterHp,
-        uint[] memory characterAttackDmg
+        uint[] memory characterAttackDmg,
+        string memory bossName,
+        string memory bossImageURI,
+        uint bossHp,
+        uint bossAttackDamage
     ) 
         ERC721("Heroes", "HERO")
     {   
+        // Initialize the boss. Save it to our global bigBoss var
+        bigBoss = BigBoss({
+            name : bossName,
+            imageURI : bossImageURI,
+            hp : bossHp,
+            maxHp : bossHp,
+            attackDamage : bossAttackDamage
+        });
+
+        console.log("Done initializing boss %s with HP %s, img %s", bigBoss.name, bigBoss.hp, bigBoss.imageURI);
+        
         // Loop through all the characters, and save their values in our contract so
         // we can use them later when we mint our NFTs.
         for (uint i = 0; i < characterNames.length; i += 1) {
