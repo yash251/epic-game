@@ -71,7 +71,7 @@ contract MyEpicGame is ERC721 {
         });
 
         console.log("Done initializing boss %s with HP %s, img %s", bigBoss.name, bigBoss.hp, bigBoss.imageURI);
-        
+
         // Loop through all the characters, and save their values in our contract so
         // we can use them later when we mint our NFTs.
         for (uint i = 0; i < characterNames.length; i += 1) {
@@ -143,5 +143,13 @@ contract MyEpicGame is ERC721 {
         );
         
         return output;
-        }
+    }
+
+    function attackBoss() public {
+        // Get the state of the player's NFT
+        // Make sure the player has more than 0 HP
+        // Make sure the boss has more than 0 HP
+        // Allow player to attack boss
+        // Allow boss to attack player
+    }
 }
