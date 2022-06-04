@@ -152,6 +152,10 @@ contract MyEpicGame is ERC721 {
         console.log("\nPlayer with character %s about to attack. Has %s HP and %s AD", player.name, player.hp, player.attackDamage);
         console.log("Boss %s has %s HP and %s AD", bigBoss.name, bigBoss.hp, bigBoss.attackDamage);
         // Make sure the player has more than 0 HP
+        require(
+            player.hp > 0,
+            "Error: Character must have HP to attack the boss"
+        );
         // Make sure the boss has more than 0 HP
         // Allow player to attack boss
         // Allow boss to attack player
