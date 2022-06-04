@@ -147,6 +147,10 @@ contract MyEpicGame is ERC721 {
 
     function attackBoss() public {
         // Get the state of the player's NFT
+        uint256 nftTokenIdOfPlayer = nftHolders[msg.sender]; // grabbing the tokenId that player owns
+        CharacterAttributes storage player = nftHolderAttributes[nftTokenIdOfPlayer];
+        console.log("\nPlayer with character %s about to attack. Has %s HP and %s AD", player.name, player.hp, player.attackDamage);
+        console.log("Boss %s has %s HP and %s AD", bigBoss.name, bigBoss.hp, bigBoss.attackDamage);
         // Make sure the player has more than 0 HP
         // Make sure the boss has more than 0 HP
         // Allow player to attack boss
