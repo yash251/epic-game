@@ -169,5 +169,14 @@ contract MyEpicGame is ERC721 {
             bigBoss.hp = bigBoss.hp - player.attackDamage;
         }
         // Allow boss to attack player
+        if (player.hp < bigBoss.attackDamage) {
+            player.hp = 0;
+        }
+        else {
+            player.hp = player.hp - bigBoss.attackDamage;
+        }
+
+        console.log("Player attacked boss. New boss HP: %s", bigBoss.hp);
+        console.log("Boss attacked player. New player HP: %s\n", player.hp);
     }
 }
