@@ -157,6 +157,10 @@ contract MyEpicGame is ERC721 {
             "Error: Character must have HP to attack the boss"
         );
         // Make sure the boss has more than 0 HP
+        require(
+            bigBoss.hp > 0,
+            "Error: Boss must have HP to attack the character"
+        );
         // Allow player to attack boss
         // Allow boss to attack player
     }
