@@ -162,6 +162,12 @@ contract MyEpicGame is ERC721 {
             "Error: Boss must have HP to attack the character"
         );
         // Allow player to attack boss
+        if (bigBoss.hp < player.attackDamage) {
+            bigBoss.hp = 0;
+        }
+        else {
+            bigBoss.hp = bigBoss.hp - player.attackDamage;
+        }
         // Allow boss to attack player
     }
 }
