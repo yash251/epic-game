@@ -40,6 +40,10 @@ contract MyEpicGame is ERC721 {
     // to store the owner of the NFT and reference it later
     mapping(address => uint256) public nftHolders;
 
+    // Events are basically like webhooks. We can "fire" an event from Solidity, and then "catch" that event on our web app
+    event CharacterNFTMinted (address sender, uint256 tokenId, uint256 characterIndex);
+    event AttackComplete (address sender, uint256 newBossHp, uint256 newPlayerHp);
+
     struct BigBoss {
         string name;
         string imageURI;
@@ -116,6 +120,8 @@ contract MyEpicGame is ERC721 {
 
         // Increment the tokenId for the next person that uses it
         _tokenIds.increment();
+
+        emit CharacterNFTMinted(msg.sender, newItemId, _characterIndex);
     }
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
@@ -175,6 +181,8 @@ contract MyEpicGame is ERC721 {
         else {
             player.hp = player.hp - bigBoss.attackDamage;
         }
+
+        emit AttackComplete(msg.sender, bigBoss.hp, player.hp);
 
         console.log("Player attacked boss. New boss HP: %s", bigBoss.hp);
         console.log("Boss attacked player. New player HP: %s\n", player.hp);
